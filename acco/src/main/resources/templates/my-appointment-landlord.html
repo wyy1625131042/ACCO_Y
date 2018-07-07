@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-9">
+            <h3>
+                ACCO-我的预约
+            </h3>
+
+        </div>
+        <div class="col-xs-3">
+            <div class="btn-group">
+                <button class="btn btn-primary" type="button" th:text="${username}"></button>
+                <!--<button class="btn">Action</button> -->
+                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle"><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">操作</a>
+                    </li>
+                    <li>
+                        <a href="#">设置栏目</a>
+                    </li>
+                    <li>
+                        <a href="javascript:formSubmit()">注销</a>
+                    </li>
+                    <!--<li class="divider">-->
+                    <!--</li>-->
+                    <!--<li class="dropdown-submenu">-->
+                    <!--<a tabindex="-1" href="#">更多选项</a>-->
+                    <!--<ul class="dropdown-menu">-->
+                    <!--<li>-->
+                    <!--<a href="#">操作</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a href="#">设置栏目</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a href="#">更多设置</a>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+        </div>
+        <form th:action="@{/logout}" method="post" id="logoutForm">
+            <input type="hidden" value="注销"/>
+        </form>
+    </div>
+    <div th:text="${msg}"></div>
+    <div class="row">
+        <div class="col-xs-2">
+            <ul class="nav nav-list">
+                <li>
+                    <a href="/">首页</a>
+                </li>
+                <li>
+                    <a href="/r/my-appointment-landlord">我的预约</a>
+                </li>
+                <li>
+                    <a href="/h/houseInfoListLandlord">我的房屋</a>
+                </li>
+                <li>
+                    <a href="/h/add">新增房屋出租</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-10">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        预约时间
+                    </th>
+                    <th>
+                        碰面地点
+                    </th>
+                    <th>
+                        学生名称
+                    </th>
+                    <th>
+                        联系电话
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="obj : ${list}">
+                    <td th:text="${obj.meet}">${obj.meet}</td>
+                    <td th:text="${obj.location}">${obj.location}</td>
+                    <td th:text="${obj.student.getName()}">${obj.student.getName()}</td>
+                    <td th:text="${obj.student.getPhone()}">${obj.student.getPhone}</td>
+                    <td>
+                        <div id="meet" sec:authorize="hasRole('ROLE_STUDENT')" th:onclick="'javascript:rent(\''+ 1 +'\')'">与房东碰面</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<script>
+    function formSubmit() {
+        document.getElementById("logoutForm").submit();
+    }
+</script>
+</body>
+</html>

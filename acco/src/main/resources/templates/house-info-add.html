@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>房屋信息</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<br>
+<!--<div class="container-fluid">-->
+    <!--<div class="row-fluid">-->
+        <!--<div class="span3">-->
+        <!--</div>-->
+        <!--<div class="span6">-->
+
+        <!--<form action="#" th:action="@{/h/save}" th:object="${houseInfo}" method="post">-->
+    <!--<label>-->
+        <!--<input type="hidden" name="landlordId" th:value="*{landlordId}" />-->
+    <!--</label><br/>-->
+    <!--<label>-->
+        <!--<input type="hidden" name="landlordName" th:value="*{landlordName}" />-->
+    <!--</label><br/>-->
+        <!--<div class="form-group">-->
+            <!--<label for="address">地址</label>-->
+            <!--<input class="form-control" id="address" th:title="地址" type="text" th:field="*{address}" />-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="type">类型</label>-->
+            <!--<select class="form-control" id="type" th:field="*{type}">-->
+                <!--<option value="整租">整租</option>-->
+                <!--<option value="合租">合租</option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="pnumber">可住人数</label>-->
+            <!--<input class="form-control" id="pnumber" th:title="可住人数" type="text" th:field="*{pnumber}" />-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="rent">租金</label>-->
+            <!--<input class="form-control" id="rent" th:title="租金" type="text" th:field="*{rent}" />-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="status">状态</label>-->
+            <!--<select class="form-control" id="status" th:field="*{status}">-->
+                <!--<option value="true">可用</option>-->
+                <!--<option value="false">不可用</option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="msg">说明</label>-->
+            <!--<input class="form-control" id="msg" th:title="说明" type="text" th:field="*{msg}" />-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<input class="form-control btn btn-primary" id="submit" value="提&nbsp;&nbsp;交" type="submit">-->
+        <!--</div>-->
+    <!--</form>-->
+        <!--</div>-->
+        <!--<div class="span3">-->
+        <!--</div>-->
+        <!--</div>-->
+<!--</div>-->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-9">
+            <h3>
+                ACCO-<span th:text="${title}"></span>
+            </h3>
+
+        </div>
+        <div class="col-xs-3">
+            <div class="btn-group">
+                <button class="btn btn-primary" type="button" th:text="${username}"></button>
+                <!--<button class="btn">Action</button> -->
+                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle"><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">操作</a>
+                    </li>
+                    <li>
+                        <a href="#">设置栏目</a>
+                    </li>
+                    <li>
+                        <a href="javascript:formSubmit()">注销</a>
+                    </li>
+                    <!--<li class="divider">-->
+                    <!--</li>-->
+                    <!--<li class="dropdown-submenu">-->
+                    <!--<a tabindex="-1" href="#">更多选项</a>-->
+                    <!--<ul class="dropdown-menu">-->
+                    <!--<li>-->
+                    <!--<a href="#">操作</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a href="#">设置栏目</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<a href="#">更多设置</a>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+        </div>
+        <form th:action="@{/logout}" method="post" id="logoutForm">
+            <input type="hidden" value="注销"/>
+        </form>
+    </div>
+    <div th:text="${msg}"></div>
+    <div class="row">
+        <div class="col-xs-2">
+            <ul class="nav nav-list">
+                <li>
+                    <a href="/">首页</a>
+                </li>
+                <li>
+                    <a href="/r/my-appointment-landlord">我的预约</a>
+                </li>
+                <li>
+                    <a href="/h/houseInfoListLandlord">我的房屋</a>
+                </li>
+                <li>
+                    <a href="/h/add">新增房屋出租</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-10">
+            <form action="#" th:action="@{/h/save}" th:object="${houseInfo}" method="post">
+                <label>
+                    <input type="hidden" name="landlordId" th:value="*{landlordId}" />
+                </label><br/>
+                <label>
+                    <input type="hidden" name="landlordName" th:value="*{landlordName}" />
+                </label><br/>
+                <div class="form-group">
+                    <label for="address">地址</label>
+                    <input class="form-control" id="address" th:title="地址" type="text" th:field="*{address}" />
+                </div>
+                <div class="form-group">
+                    <label for="type">类型</label>
+                    <select class="form-control" id="type" th:field="*{type}">
+                        <option value="整租">整租</option>
+                        <option value="合租">合租</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pnumber">可住人数</label>
+                    <input class="form-control" id="pnumber" th:title="可住人数" type="text" th:field="*{pnumber}" />
+                </div>
+                <div class="form-group">
+                    <label for="rent">租金</label>
+                    <input class="form-control" id="rent" th:title="租金" type="text" th:field="*{rent}" />
+                </div>
+                <div class="form-group">
+                    <label for="status">状态</label>
+                    <select class="form-control" id="status" th:field="*{status}">
+                        <option value="true">可用</option>
+                        <option value="false">不可用</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="msg">说明</label>
+                    <input class="form-control" id="msg" th:title="说明" type="text" th:field="*{msg}" />
+                </div>
+                <div class="form-group">
+                    <input class="form-control btn btn-primary" id="submit" value="提&nbsp;&nbsp;交" type="submit">
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+<script>
+    function formSubmit() {
+        document.getElementById("logoutForm").submit();
+    }
+</script>
+</body>
+</html>

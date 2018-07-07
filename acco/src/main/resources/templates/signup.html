@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<br>
+<form action="#" th:action="@{/u/addUser}" th:object="${user}" method="post">
+    <!--
+        private String name;
+    private String loginName;
+    private String password;
+    private String address;
+    private String phone;
+    -->
+    <div class="form-group">
+        <label for="loginName">用户名</label>
+        <input class="form-control" id="loginName" th:title="用户名" type="text" th:field="*{loginName}" />
+    </div>
+    <div class="form-group">
+        <label for="name">昵称</label>
+        <input th:title="昵称" th:field="*{name}" class="form-control" id="name"  type="text"  />
+    </div>
+    <div class="form-group">
+        <label for="password">密码</label>
+        <input th:title="密码" th:field="*{password}" class="form-control" id="password"  type="password"  />
+    </div>
+    <div class="form-group">
+        <label for="address">地址</label>
+        <input th:title="地址" th:field="*{address}" class="form-control" id="address"  type="text"  />
+    </div>
+    <div class="form-group">
+        <label for="phone">手机号</label>
+        <input th:title="手机号" th:field="*{phone}" class="form-control" id="phone"  type="text"  />
+    </div>
+    <div class="form-group">
+        <label for="type">类型</label>
+        <select class="form-control" id="type" name="type">
+            <option value="student">学生</option>
+            <option value="landlord">房东</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input class="form-control btn btn-primary" id="submit" value="立&nbsp;&nbsp;即&nbsp;&nbsp;注&nbsp;&nbsp;册" type="submit">
+    </div>
+</form>
+</body>
+</html>
